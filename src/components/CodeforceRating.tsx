@@ -119,7 +119,7 @@ function CodeforceRating() {
   return (
     <div>
       {getData.length > 0 ? (
-        <div>
+        <div className="bg-white/70 rounded-xl">
           <Line data={chartData} options={chartOptions} />
         </div>
       ) : (
