@@ -9,11 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/calistoga": "^5.1.0",
+    "@fontsource/inter": "^5.1.0",
     "@svgr/webpack": "^8.1.0",
+    "chart.js": "^4.4.6",
     "framer-motion": "^11.3.21",
     "gsap": "^3.12.5",
     "next": "14.2.5",
     "react": "^18",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
     "tailwind-merge": "^2.4.0"
   },

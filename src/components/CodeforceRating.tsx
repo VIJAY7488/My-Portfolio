@@ -9,9 +9,9 @@ import {
   Tooltip,
   Legend,
   PointElement,
+  ChartOptions,
 } from "chart.js";
 
-// Register Chart.js components
 ChartJS.register(
   LineElement,
   PointElement,
@@ -22,32 +22,42 @@ ChartJS.register(
   Legend
 );
 
-export default function App() {
-  const [getData, setGetData] = useState([]);
+type RatingData = {
+  contestId: number;
+  contestName: string;
+  handle: string;
+  rank: number;
+  ratingUpdateTimeSeconds: number;
+  oldRating: number;
+  newRating: number;
+};
+
+function CodeforceRating() {
+  const [getData, setGetData] = useState<RatingData[]>([]);
 
   async function fetchRating() {
     try {
-      const data = await fetch(
+      const response = await fetch(
         "https://codeforces.com/api/user.rating?handle=vijaypatel3207"
       );
-      const res = await data.json();
-      setGetData(res.result || []); // Access the 'result' array or default to an empty array
-      console.log(res.result);
+      const data = await response.json();
+      if (data.result) {
+        setGetData(data.result as RatingData[]);
+      }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error fetching data:", error);
     }
   }
 
   useEffect(() => {
-    fetchRating(); // Fetch data on component mount
+    fetchRating();
     const intervalRating = setInterval(() => {
       fetchRating();
-    }, 10000); // Poll every 10 seconds
+    }, 10000);
 
-    return () => clearInterval(intervalRating); // Cleanup on unmount
+    return () => clearInterval(intervalRating);
   }, []);
 
-  // Dynamically generate labels from the data
   const labels = getData.map((item) =>
     new Date(item.ratingUpdateTimeSeconds * 1000).toLocaleString("en-US", {
       month: "short",
@@ -55,30 +65,29 @@ export default function App() {
     })
   );
 
-  // Prepare data for the line chart
   const chartData = {
-    labels: labels, // Dynamically generated contest dates for the X-axis
+    labels: labels,
     datasets: [
       {
         label: "Rating",
-        data: getData.map((item) => item.newRating), // Old ratings for the Y-axis
-        borderColor: "rgba(237,194,64)", // Line color
-        backgroundColor: "rgba(255,255,255)", // Fill color
-        tension: 0.4, // Smooth curve
+        data: getData.map((item) => item.newRating),
+        borderColor: "rgba(237,194,64)",
+        backgroundColor: "rgba(255,255,255)",
+        tension: 0.4,
       },
     ],
   };
 
-  const chartOptions = {
+  const chartOptions: ChartOptions<"line"> = {
     responsive: true,
     plugins: {
       legend: {
         display: true,
-        position: "top",
+        position: "top", // Ensure the position is correctly typed
       },
       title: {
         display: true,
-        text: "Codeforces User Old Ratings Over Time",
+        text: "Codeforces User Ratings Over Time",
       },
     },
     scales: {
@@ -93,47 +102,25 @@ export default function App() {
           display: true,
         },
         ticks: {
-          callback: function (value) {
-            if (value % 200 === 0) {
-              return value;
-            }
-            return "";
+            callback: function (value: string | number) {
+              // Ensure the value is a number before performing calculations
+              if (typeof value === "number") {
+                return value % 200 === 0 ? value : "";
+              }
+              return ""; // Return an empty string for non-number values
+            },
+            stepSize: 200,
           },
-          stepSize: 200, 
-          max: 3500, 
-        },
-      },
-    },
-    layout: {
-      padding: {
-        top: 10,
-        bottom: 10,
-      },
-    },
-    plugins: {
-      tooltip: {
-        backgroundColor: "rgba(204,204,204, 0.8)", // Tooltip background color
+          
       },
     },
   };
 
-  // Set background color of the canvas element
-  useEffect(() => {
-    const canvas = document.querySelector("canvas");
-    if (canvas) {
-      canvas.style.backgroundColor = "rgba(255, 255, 255, 0.8)"; // Set the background color of the canvas
-    }
-  }, []);
-
   return (
     <div>
       {getData.length > 0 ? (
-        <div className="bg-white/70 rounded-xl">
-          <Line
-            style={{ width: "800px", height: "800px" }}
-            data={chartData}
-            options={chartOptions}
-          />
+        <div>
+          <Line data={chartData} options={chartOptions} />
         </div>
       ) : (
         <p>Loading...</p>
@@ -141,3 +128,5 @@ export default function App() {
     </div>
   );
 }
+
+export default CodeforceRating;

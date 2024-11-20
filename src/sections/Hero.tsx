@@ -89,7 +89,7 @@ export const HeroSection = () => {
                 Hii 👋 I am Vijay Patel. 
               </h1>
               <p className="mt-4 text-center text-white/60 md:text-lg">
-              I am Full Stack Dev, I am a Self thought Developer,who is learning Full stack web devlopement from Youtube, now i am dedicating my time and concentration towards learning DSA.I am currently persuing BS[Honor's] from IITG in DS & AI,Thank You.
+              I am Full Stack Dev, I am a Self thought Developer,who is learning Full stack web devlopement from Youtube, now i am dedicating my time and concentration towards learning DSA.I am currently persuing BS[Honor&#39;s] from IITG in DS & AI,Thank You.
               </p>
             </div> 
 
