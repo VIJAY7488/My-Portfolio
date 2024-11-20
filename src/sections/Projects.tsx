@@ -1,6 +1,5 @@
-import darkSaasLandingPage from "@/assets/images/dark-saas-landing-page.png";
-import lightSaasLandingPage from "@/assets/images/light-saas-landing-page.png";
-import aiStartupLandingPage from "@/assets/images/ai-startup-landing-page.png";
+import shortingVisualizerImage from "@/assets/images/shortingVisualizer.png";
+import foodRecipeImage from "@/assets/images/foodRecipe.png";
 import Image from "next/image";
 import CheckCircleIcon from "@/assets/icons/check-circle.svg";
 import ArrowUpRightIcon from "@/assets/icons/arrow-up-right.svg";
@@ -8,41 +7,30 @@ import grainImage from "@/assets/images/grain.jpg"
 
 const portfolioProjects = [
   {
-    company: "Acme Corp",
-    year: "2022",
-    title: "Dark Saas Landing Page",
+    company: "Data Structure Project",
+    year: "2024",
+    title: "Shorting Visualiser",
     results: [
-      { title: "Enhanced user experience by 40%" },
-      { title: "Improved site speed by 50%" },
-      { title: "Increased mobile traffic by 35%" },
+      { title: "Enhanced the Concept" },
+      { title: "Improved Data Structure Concept" },
+      { title: "Visualize Time Complexity" },
     ],
-    link: "#",
-    image: darkSaasLandingPage,
+    link: "https://sorting-visualizer-with-js.vercel.app/",
+    image: shortingVisualizerImage,
   },
   {
-    company: "Innovative Co",
-    year: "2021",
-    title: "Light Saas Landing Page",
+    company: "Next Js Learning Project",
+    year: "2024",
+    title: "Food Recipe Project",
     results: [
-      { title: "Boosted sales by 20%" },
-      { title: "Expanded customer reach by 35%" },
-      { title: "Increased brand awareness by 15%" },
+      { title: "Learning Next Js" },
+      { title: "Routing" },
+      { title: "Usin JavaScript" },
     ],
-    link: "#",
-    image: lightSaasLandingPage,
+    link: "https://recipe-app-using-next-js-mu.vercel.app/",
+    image: foodRecipeImage,
   },
-  {
-    company: "Quantum Dynamics",
-    year: "2023",
-    title: "AI Startup Landing Page",
-    results: [
-      { title: "Enhanced user experience by 40%" },
-      { title: "Improved site speed by 50%" },
-      { title: "Increased mobile traffic by 35%" },
-    ],
-    link: "#",
-    image: aiStartupLandingPage,
-  },
+  
 ];
 
 export const ProjectsSection = () => {
