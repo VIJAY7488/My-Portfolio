@@ -11,10 +11,16 @@ export default function MainContent(){
     return(
          <div>
             <Header />
-            <HeroSection />
+            <section id="home">
+            <HeroSection /> 
+            </section>
+            <section id="projects">
             <ProjectsSection />
+            </section>
             <TapeSection />
+            <section id="about">
             <AboutSection />
+            </section>
             {/* <ContactSection /> */}
             <Footer />
          </div>
