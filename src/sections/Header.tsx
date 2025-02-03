@@ -2,7 +2,7 @@
 
 export const Header = () => {
 
-  const handlescrooll = (id) => {
+  const handlescrooll = (id: string) => {
     const section = document.getElementById(id);
 
     if(section){
